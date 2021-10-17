@@ -1,0 +1,119 @@
+<div class="dashboard-container">
+    <div class="create-poll-cta">
+        <button class="create-btn" >Create your own Poll</button>
+    </div>
+    <div class="left-container">
+        <div class="top-three-polls-wrapper">
+            <div class="title">
+                <span> Top 3 Polls</span>
+            </div>
+            <div class="elements">
+            </div>
+
+        </div>
+    </div>
+    <div class="right-container">
+        <div class="recent-polls-wrapper">
+            <div class="title">
+                <span> Recent Polls</span>
+            </div>
+            <div class="elements">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$('document').ready(function () {
+    $('.create-poll-cta button').click(function () {
+        window.location.href = '/Poll-Create';
+    });
+
+    axios('/api/polls/topThree', {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+        },
+    }).then(function (resp) {
+        var polls = resp.data.polls;
+        for (const key in polls) {
+
+            var pollJSONObj = polls[key];
+
+            var wrapper = document.createElement("div");
+            wrapper.classList.add("poll-card-wrapper");
+
+            var questionEl = document.createElement("a");
+            questionEl.classList.add("question");
+            questionEl.innerText = pollJSONObj.question;
+            questionEl.href = '/Poll-Vote?poll_id=' + pollJSONObj.poll_id;
+
+            var optionsEl = document.createElement("div");
+            optionsEl.classList.add("options");
+            for (const index in pollJSONObj.answers) {
+                var answer = pollJSONObj.answers[index];
+                var optionEl = document.createElement("div");
+                optionEl.classList.add("option");
+                optionEl.innerHTML = answer.text + ": " + answer.vote + " votes";
+                optionsEl.appendChild(optionEl);
+            }
+
+            var dateEl = document.createElement("div");
+            dateEl.classList.add("relative-date");
+            dateEl.innerHTML = timeDifference(pollJSONObj.creation_date);
+            optionsEl.appendChild(dateEl);
+
+            wrapper.appendChild(questionEl);
+            wrapper.appendChild(optionsEl);
+            $(".top-three-polls-wrapper .elements").append(wrapper);
+        }
+    })
+    .catch(function (e) {
+        console.log("Error:", e);
+    });
+
+
+    axios('/api/polls', {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json",
+        },
+    }).then(function (resp) {
+        var polls = resp.data.polls;
+        for (const key in polls) {
+
+            var pollJSONObj = polls[key];
+
+            var wrapper = document.createElement("div");
+            wrapper.classList.add("poll-card-wrapper");
+
+            var questionEl = document.createElement("a");
+            questionEl.classList.add("question");
+            questionEl.innerText = pollJSONObj.question;
+            questionEl.href = '/Poll-Vote?poll_id=' + pollJSONObj.poll_id;
+
+            var optionsEl = document.createElement("div");
+            optionsEl.classList.add("options");
+            for (const index in pollJSONObj.answers) {
+                var answer = pollJSONObj.answers[index];
+                var optionEl = document.createElement("div");
+                optionEl.classList.add("option");
+                optionEl.innerHTML = answer.text + ": " + answer.vote + " votes";
+                optionsEl.appendChild(optionEl);
+            }
+
+            var dateEl = document.createElement("div");
+            dateEl.classList.add("relative-date");
+            dateEl.innerHTML = timeDifference(pollJSONObj.creation_date);
+            optionsEl.appendChild(dateEl);
+
+            wrapper.appendChild(questionEl);
+            wrapper.appendChild(optionsEl);
+            $(".recent-polls-wrapper .elements").append(wrapper);
+        }
+    })
+    .catch(function (e) {
+        console.log("Error:", e);
+    });
+});
+</script>

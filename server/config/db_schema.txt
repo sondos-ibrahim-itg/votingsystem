@@ -1,0 +1,18 @@
+
+CREATE TABLE `polls` (
+  `poll_id` int NOT NULL AUTO_INCREMENT,
+  `question` varchar(255) DEFAULT NULL,
+  `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `total_votes` int DEFAULT '0',
+  PRIMARY KEY (`poll_id`)
+)
+
+CREATE TABLE `answers` (
+  `answer_id` int NOT NULL AUTO_INCREMENT,
+  `poll_id` int NOT NULL,
+  `answer_text` varchar(225) DEFAULT NULL,
+  `num_of_votes` int DEFAULT NULL,
+  PRIMARY KEY (`answer_id`),
+  KEY `poll_id_idx` (`poll_id`),
+  CONSTRAINT `poll_id` FOREIGN KEY (`poll_id`) REFERENCES `polls` (`poll_id`)
+)

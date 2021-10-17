@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <title>Voting System </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+  <script src="/View-Show?template=assets/js/app.js" language="JavaScript"></script>
+  <link rel="stylesheet" href="/View-Show?template=assets/css/app.css">
+
+
+<body>
+  <div id="container">
+    <div class="header-wrapper">
+      <div class="header-text">Voting Dojo</div>
+    </div>
+    <div class="content-wrapper">
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  $('document').ready(function () {
+    var template = '<%= template %>';
+    switch (template) {
+      case 'pollForm':
+        tepmplateView = "templates/createPollForm.html";
+        break;
+      case 'dashboard':
+        tepmplateView = "templates/dashboard.html";
+        break;
+      case 'vote':
+        tepmplateView = "templates/voting.html";
+        break;
+      case 'view':
+        tepmplateView = "templates/pollView.html";
+        break;
+      default:
+        break;
+    }
+    $(".content-wrapper").load("/View-Show?template=" + tepmplateView);
+  });
+</script>

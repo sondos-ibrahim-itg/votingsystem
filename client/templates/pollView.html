@@ -1,0 +1,74 @@
+<div class="dashboard-cta">
+    <button class="btn" onclick="window.location.href = '/Poll-Home'">Back to Home</button>
+</div>
+<div class="poll-view-container">
+    <div class="header"></div>
+    <div class="options">
+    </div>
+</div>
+
+<script>
+    $('document').ready(function () {
+        var params = location.search !== '' ? location.search.split('?')[1] : '';
+        var poll_id = '';
+        var paramList = params.split('&');
+        for (var key in paramList) {
+            if (paramList[key].startsWith('poll_id')) {
+                poll_id = paramList[key].split("=")[1];
+            }
+        }
+        axios('/api/poll/byId', {
+                method: "GET",
+                params: {
+                    poll_id: poll_id,
+                },
+                headers: {
+                    "Content-type": "application/json",
+                },
+            }).then(function (resp) {
+                var polls = resp.data.poll;
+                for (const key in polls) {
+
+                    var pollJSONObj = polls[key];
+
+                    var questionEl = document.createElement("div");
+                    questionEl.classList.add("question");
+                    questionEl.innerText = pollJSONObj.question;
+                    $(".poll-view-container .header").append(questionEl);
+
+
+                    var wrapper = document.createElement("div");
+                    wrapper.classList.add("poll-options-wrapper");
+
+                    var optionsEl = document.createElement("div");
+                    optionsEl.classList.add("options");
+                    for (const index in pollJSONObj.answers) {
+                        var answer = pollJSONObj.answers[index];
+                        var optionEl = document.createElement("div");
+                        optionEl.classList.add("option");
+
+                        var opTextEl = document.createElement("div");
+                        opTextEl.classList.add("option-text");
+                        opTextEl.innerHTML = answer.text;
+                        optionEl.appendChild(opTextEl);
+
+                        var optVoteEl = document.createElement("div");
+                        optVoteEl.classList.add("option-vote");
+                        optVoteEl.innerHTML = answer.vote + " votes";
+
+                        optionEl.appendChild(optVoteEl);
+
+                        optionsEl.appendChild(optionEl);
+                    }
+
+
+                    wrapper.appendChild(optionsEl);
+                    $(".poll-view-container .options").append(wrapper);
+                }
+            })
+            .catch(function (e) {
+                console.log("Error:", e);
+            });
+
+    });
+</script>

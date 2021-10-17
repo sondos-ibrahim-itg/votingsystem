@@ -1,0 +1,108 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.required, .error {
+    color: red;
+}
+.hidden {
+    display: none;
+}
+.header-wrapper {
+    width: 100%;
+    background-color: lightgray;
+    border: 1px solid black;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.header-wrapper .header-text {
+    font-weight: bold;
+    font-size: 30px;
+}
+/* 
+    DashBoard Page
+*/
+.create-poll-cta, .dashboard-cta {
+    width: 100%;
+    height: 40px;
+}
+
+.create-poll-cta .create-btn, .dashboard-cta .btn{
+    float: right;
+}
+
+.left-container, .right-container {
+    width: 48%;
+    border: 1px solid black;
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+.left-container {
+    float: left;
+}
+
+.right-container {
+    float: right;
+}
+
+.poll-card-wrapper {
+    width: 80%;
+    border: 1px solid black;
+    background-color: lightgray;
+    margin: 20px;
+    padding: 10px;
+}
+.options .option {
+    display: inline-block;
+    padding: 0 10px 0 0;
+}
+
+.question-wrapper textarea, .options-wrapper input {
+    width: 60%;
+}
+.submit-atc {
+    padding: 10px 0;
+}
+.voting-container, .poll-view-container {
+    width: 100%;
+    border: 1px solid black;
+    background-color: lightgray;
+    text-align: center;
+}
+.voting-container .question, .poll-view-container .question {
+    font-size: 30px;
+    margin: 20px;
+}
+.poll-options-wrapper {
+    text-align: center;
+}
+.voting-container .poll-options-wrapper .option {
+    width: 250px;
+    border: 1px solid black;
+    background-color: white;
+    height: 150px;
+    margin: 10px;
+    display: inline-block
+
+}
+.voting-container .option-text {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.poll-view-container .poll-options-wrapper .option {
+    display: block;
+    margin: 10px 0;
+}
+.poll-view-container .option-text {
+    display: inline-block;
+    margin-right: 70px;
+}
+.poll-view-container .option-vote {
+    display: inline-block;
+}

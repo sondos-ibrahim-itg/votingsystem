@@ -1,0 +1,41 @@
+<div class="dashboard-cta">
+    <button class="btn" onclick="window.location.href = '/Poll-Home'">Back to Home</button>
+</div>
+<form name="pollForm" class="poll-form" onsubmit="return validateForm(this, event)">
+    <div class="form-container">
+        <div class="error-msg error hidden">One or more required fields are empty</div>
+        <div class="left-container">
+            <div class="question-wrapper">
+                <div class="label">
+                    <span> Your Question</span><span class="required">*</span>
+                </div>
+                <div class="element">
+                    <textarea minlength="10" rows="10" class="required-field"></textarea>
+                </div>
+                <div class="submit-atc">
+                    <button type="submit" class="submit">Submit Poll</button>
+                </div>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="options-wrapper">
+                <div class="option">
+                    <div><span>Option 1</span><span class="required">*</span></div>
+                    <input name="option_1" class="required-field option_1" />
+                </div>
+                <div class="option">
+                    <div><span>Option 2</span><span class="required">*</span></div>
+                    <input name="option_2" class="required-field option_2" />
+                </div>
+                <div class="option">
+                    <div><span>Option 3</span></div>
+                    <input name="option_3" class="option_3" />
+                </div>
+                <div class="option">
+                    <div><span>Option 4</span></div>
+                    <input name="option_4" class="option_4" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
